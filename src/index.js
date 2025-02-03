@@ -44,9 +44,9 @@ function deleteTask(projectId, taskId) {
     createId(app[projectId].tasks);
 }
 
-addProject("Defualt", "All default projects");
-addProject("Defualtss", "All defaultss projects");
-addTask(app[0].tasks, "Walk", "Go for a walk", new Date(), "Low", "");
-console.log(app);
-deleteProject(1);
-deleteTask(0,0);
+let currentProject;
+
+addProject("Default", "The Default Tasks");
+currentProject = app[0];
+addTask(currentProject.tasks, "Todo List", "Complete the Todo list project from the Odin project", new Date(2025, 1, 10), "Low", "Take a water bottle");
+console.log(currentProject);
