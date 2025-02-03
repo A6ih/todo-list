@@ -6,6 +6,34 @@
     <title>ToDo App</title>
 </head>
 <body>
-    
+    <header>
+        <h1>Todo List</h1>
+    </header>
+    <nav>
+        <div id="project-nav"></div>
+        <button id="show-project-dialog">Add Project</button>
+        <dialog id="project-dialog">
+            <form action="">
+                <p>
+                    <label for="project-title">Title:</label><br>
+                    <input type="text" name="project-title" id="project-title" required>
+                </p>
+                <p>
+                    <label for="project-description">Description:</label><br>
+                    <textarea name="project-description" id="project-description"></textarea>
+                </p>
+                <div>
+                    <button id="add-project-btn">
+                        Add
+                    </button>
+                    <button id="project-cancel-btn">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </dialog>
+    </nav>
+    <main></main>
+    <footer></footer>
 </body>
 </html>

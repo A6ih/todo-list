@@ -1,6 +1,9 @@
 import "./styles.css";
+import { showProjectModal, addProjectDom, addToNav } from "./dom";
 
 const app = [];
+showProjectModal();
+addProjectDom(addProject, app);
 
 class Task {
     constructor(title, description, dueDate, priority, note) {
@@ -50,3 +53,4 @@ addProject("Default", "The Default Tasks");
 currentProject = app[0];
 addTask(currentProject.tasks, "Todo List", "Complete the Todo list project from the Odin project", new Date(2025, 1, 10), "Low", "Take a water bottle");
 console.log(currentProject);
+addToNav(app);
