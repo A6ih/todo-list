@@ -34,7 +34,6 @@ export function eventListeners(addProjectFn, deleteProjectFn, switchProjectFn, g
         const description = document.querySelector("#project-description");
         const inputs = [title, description];
         addProjectFn(title.value, description.value);
-        console.log(arr);
         clearInputs(inputs);
         renderProjectNav(arr, updateProjectElements);
         projectDialog.close();
@@ -55,6 +54,7 @@ export function eventListeners(addProjectFn, deleteProjectFn, switchProjectFn, g
         clearInputs(inputs);
         document.querySelector("#medium").checked = "true";
         taskDialog.close();
+        console.log(arr);
     })
 
     renderProjectNav(arr, updateProjectElements);
@@ -64,6 +64,7 @@ export function eventListeners(addProjectFn, deleteProjectFn, switchProjectFn, g
         const index = +event.target.dataset.deleteProject;
         deleteProjectFn(index);
         renderProjectNav(arr, updateProjectElements);
+        renderTasks(arr[index]);
     }
 
     function updateProjectElements() {
@@ -98,6 +99,12 @@ function renderTasks(obj) {
     projectHeader.textContent = "";
     projectDecription.textContent = "";
     taskCardsContainer.textContent = "";
+
+    if(obj === undefined) {
+        projectHeader.textContent = "No Projects";
+        projectDecription.textContent = "Make a new project to start adding tasks";
+        return;
+    }
 
     projectHeader.textContent = obj.title;
     projectDecription.textContent = obj.description;
