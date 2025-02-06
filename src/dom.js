@@ -4,6 +4,8 @@ const showProjectDialog = document.querySelector("#show-project-dialog");
 const projectDialog = document.querySelector("#project-dialog");
 const addProjectBtn = document.querySelector("#add-project-btn");
 const projectNav = document.querySelector("#project-nav");
+const addTaskBtn = document.querySelector("#add-task-btn");
+const taskDialog = document.querySelector("#task-dialog");
 let deleteProjectBtns;
 let projectContainer;
 
@@ -11,6 +13,10 @@ export function eventListeners(addProjectFn, deleteProjectFn, switchProjectFn, g
 
     showProjectDialog.addEventListener("click", function() {
         projectDialog.showModal();
+    })
+
+    addTaskBtn.addEventListener("click", function() {
+        taskDialog.showModal();
     })
 
     addProjectBtn.addEventListener("click", function(event) {

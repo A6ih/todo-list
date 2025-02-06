@@ -10,10 +10,57 @@
         <h1>Todo App</h1>
     </header>
     <div id="add-task-container">
-        <button>
+        <button id="add-task-btn">
             +
         </button>
         <h4>Add Task</h4>
+        <dialog id="task-dialog">
+            <form action="">
+                <p>
+                    <label for="task-title">Title</label><br>
+                    <input type="text" name="task-title" id="task-title" required>
+                </p>
+                <p>
+                    <label for="task-description">Description</label><br>
+                    <textarea name="task-description" id="task-description" maxlength="160" cols="20" rows="3"></textarea>
+                </p>
+                <p>
+                    <label for="task-due-date">Due Date</label><br>
+                    <input type="date" name="task-due-date" id="task-due-date" required>
+                </p>
+                <fieldset>
+                    <legend>Priority</legend>
+                    <p>
+                        <input type="radio" name="priority" id="low" value="Low">
+                        <label for="low">Low</label>
+                    </p>
+                    <p>
+                        <input type="radio" name="priority" id="medium" value="Medium" checked>
+                        <label for="medium">Medium</label>
+                    </p>
+                    <p>
+                        <input type="radio" name="priority" id="high" value="High">
+                        <label for="high">High</label>
+                    </p>
+                </fieldset>
+                <p>
+                    <label for="note">Note</label><br>
+                    <textarea name="note" id="note" cols="20" rows="6"></textarea>
+                </p>
+                <p>
+                    <label for="select-project">Project</label><br>
+                    <select name="select-project" id="select-project"></select>
+                </p>
+                <div>
+                    <button id="add-task-btn">
+                        Add
+                    </button>
+                    <button id="task-cancel-btn">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </dialog>
     </div>
     <nav>
         <h2>My Projects</h1>
