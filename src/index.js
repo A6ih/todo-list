@@ -52,7 +52,7 @@ const getCurrentProject = () => currentProject;
 
 addProject("Default", "The Default Tasks");
 currentProject = app[0];
-addTask(currentProject.tasks, "Todo List", "Complete the Todo list project from the Odin project", new Date(2025, 1, 10), "Low", "Take a water bottle");
+addTask(currentProject.tasks, "Todo List", "Complete the Todo list project from the Odin project", "2025-02-10", "Low", "Take a water bottle");
 console.log(currentProject);
 
 eventListeners(addProject, deleteProject, switchProject, getCurrentProject, addTask, deleteTask, app);

@@ -9,11 +9,11 @@
     <header>
         <h1>Todo App</h1>
     </header>
-    <div id="add-task-container">
-        <button id="add-task-btn">
+    <div id="add-task-container" class="add-btn-container">
+        <button id="show-task-dialog">
             +
         </button>
-        <h4>Add Task</h4>
+        <label for="show-task-dialog">Add Task</label>
         <dialog id="task-dialog">
             <form action="">
                 <p>
@@ -44,8 +44,8 @@
                     </p>
                 </fieldset>
                 <p>
-                    <label for="note">Note</label><br>
-                    <textarea name="note" id="note" cols="20" rows="6"></textarea>
+                    <label for="task-note">Note</label><br>
+                    <textarea name="task-note" id="task-note" cols="20" rows="6"></textarea>
                 </p>
                 <p>
                     <label for="select-project">Project</label><br>
@@ -65,7 +65,10 @@
     <nav>
         <h2>My Projects</h1>
         <div id="project-nav"></div>
-        <button id="show-project-dialog">+ Project</button>
+        <div class="add-btn-container">
+            <button id="show-project-dialog">+</button>
+            <label for="show-project-dialog">New Project</label>
+        </div>
         <dialog id="project-dialog">
             <form action="">
                 <p>
