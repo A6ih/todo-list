@@ -7,7 +7,7 @@ const projectNav = document.querySelector("#project-nav");
 let deleteProjectBtns;
 let projectContainer;
 
-export function eventListeners(addProjectFn, deleteProjectFn, addTaskFn, deleteTaskFn, arr){
+export function eventListeners(addProjectFn, deleteProjectFn, switchProjectFn, getProjectFn, addTaskFn, deleteTaskFn, arr){
 
     showProjectDialog.addEventListener("click", function() {
         projectDialog.showModal();
@@ -26,6 +26,7 @@ export function eventListeners(addProjectFn, deleteProjectFn, addTaskFn, deleteT
     })
 
     renderProjectNav(arr, updateProjectElements);
+    renderTasks(arr[0]);
 
     function deleteProject(event) {
         const index = +event.target.dataset.deleteProject;
@@ -40,7 +41,7 @@ export function eventListeners(addProjectFn, deleteProjectFn, addTaskFn, deleteT
     }
 }
 
-export function renderProjectNav(arr, fn) {
+function renderProjectNav(arr, fn) {
     projectNav.textContent = ""
     for (let i = 0; i < arr.length; i++) {
         const div = createElement("div", "class", "project-container", "");
@@ -57,7 +58,34 @@ export function renderProjectNav(arr, fn) {
     console.log(deleteProjectBtns);
 }
 
+function renderTasks(obj) {
+    const projectHeader = document.querySelector("#project-header-display");
+    const projectDecription = document.querySelector("#project-description-display");
+    const taskCardsContainer = document.querySelector("#task-cards-container");
 
-function displayTasks(event) {
-    const index = +event.target.dataset.projectDiv;
+    projectHeader.textContent = "";
+    projectDecription.textContent = "";
+
+    projectHeader.textContent = obj.title;
+    projectDecription.textContent = obj.description;
+
+    const taskArr = obj.tasks;
+
+    for(let i = 0; i < taskArr.length; i++) {
+        const div =  createElement("div", "class", "task-cards", "");
+        div.appendChild(createElement("h4", "class", "task-title", "Title: " + taskArr[0].title));
+        div.appendChild(createElement("p", "class", "task-description","Description: " + taskArr[0].description));
+        div.appendChild(createElement("p", "class", "task-due-date", "Due Date: " + taskArr[0].dueDate));
+        div.appendChild(createElement("p", "class", "task-priority", "Priority: " + taskArr[0].priority));
+        div.appendChild(createElement("hp", "class", "task-note", "Note: " + taskArr[0].note));
+        taskCardsContainer.appendChild(div);
+    }
+    const addBtnDiv =  createElement("div", "class", "task-cards", "");
+    const addTaskBtn = createElement("button", "id", "add-task-btn", "+");
+    addBtnDiv.appendChild(addTaskBtn);
+    taskCardsContainer.appendChild(addBtnDiv);
 }
+
+// function Tasks(event) {
+//     const index = +event.target.dataset.projectDiv;
+// }

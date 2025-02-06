@@ -47,9 +47,12 @@ function deleteTask(projectId, taskId) {
 
 let currentProject;
 
+const switchProject = index => currentProject = app[index];
+const getCurrentProject = () => currentProject;
+
 addProject("Default", "The Default Tasks");
 currentProject = app[0];
 addTask(currentProject.tasks, "Todo List", "Complete the Todo list project from the Odin project", new Date(2025, 1, 10), "Low", "Take a water bottle");
 console.log(currentProject);
 
-eventListeners(addProject, deleteProject, addTask, deleteTask, app);
+eventListeners(addProject, deleteProject, switchProject, getCurrentProject, addTask, deleteTask, app);
