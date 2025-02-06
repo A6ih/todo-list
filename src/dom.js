@@ -80,10 +80,6 @@ function renderTasks(obj) {
         div.appendChild(createElement("hp", "class", "task-note", "Note: " + taskArr[0].note));
         taskCardsContainer.appendChild(div);
     }
-    const addBtnDiv =  createElement("div", "class", "task-cards", "");
-    const addTaskBtn = createElement("button", "id", "add-task-btn", "+");
-    addBtnDiv.appendChild(addTaskBtn);
-    taskCardsContainer.appendChild(addBtnDiv);
 }
 
 // function Tasks(event) {
