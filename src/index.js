@@ -56,14 +56,8 @@ function updateApp() {
     }
 }
 
-let currentProject;
-
-const switchProject = index => currentProject = app[index];
-const getCurrentProject = () => currentProject;
-
 addProject("Default", "The Default Tasks");
-currentProject = app[0];
-addTask(currentProject.tasks, "Todo List", "Complete the Todo list project from the Odin project", "2025-02-10", "Low", "Take a water bottle");
+addTask(app[0].tasks, "Todo List", "Complete the Todo list project from the Odin project", "2025-02-10", "Low", "Take a water bottle");
 console.log(app);
 
-eventListeners(addProject, deleteProject, switchProject, getCurrentProject, addTask, deleteTask, app);
+eventListeners(addProject, deleteProject, addTask, deleteTask, app);

@@ -7,9 +7,8 @@ const selectProject = document.querySelector("#select-project");
 let deleteProjectBtns;
 let projectTitleClick;
 let deleteTaskBtns;
-let taskContainers;
 
-export function eventListeners(addProjectFn, deleteProjectFn, switchProjectFn, getProjectFn, addTaskFn, deleteTaskFn, arr){
+export function eventListeners(addProjectFn, deleteProjectFn, addTaskFn, deleteTaskFn, arr){
 
     document.querySelector("#show-project-dialog").addEventListener("click", function() {
         projectDialog.showModal();
@@ -89,7 +88,6 @@ export function eventListeners(addProjectFn, deleteProjectFn, switchProjectFn, g
 
     function updateTaskElements() {
         deleteTaskBtns = Array.from(document.querySelectorAll(".task-delete-btn"));
-        taskContainers = Array.from(document.querySelectorAll(".task-cards"));
         deleteTaskBtns.forEach(item => item.addEventListener("click", deleteTask));
     }
 }
@@ -155,6 +153,7 @@ function renderTasks(obj, fn) {
     }
     fn();
     console.log(obj);
+    hideTaskElements();
 }
 
 function renderProjectOptions(arr) {
@@ -169,4 +168,22 @@ function clearInputs(arr) {
     for (let i = 0; i < arr.length; i++) {
         arr[i].value = "";
     }
+}
+
+function hideTaskElements() {
+    Array.from(document.querySelectorAll(".task-description")).
+        forEach(item => item.style.display = "none");
+    Array.from(document.querySelectorAll(".task-note")).
+        forEach(item => item.style.display = "none");
+    Array.from(document.querySelectorAll(".task-btn-container")).
+        forEach(item => item.style.display = "none");
+}
+
+function showTaskElements() {
+    Array.from(document.querySelectorAll(".task-description")).
+        forEach(item => item.style.display = "block");
+    Array.from(document.querySelectorAll(".task-note")).
+        forEach(item => item.style.display = "block");
+    Array.from(document.querySelectorAll(".task-btn-container")).
+        forEach(item => item.style.display = "block");
 }
