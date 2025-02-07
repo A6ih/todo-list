@@ -83,14 +83,27 @@ textarea:not([rows]) {
   gap: 0.7rem;
 }
 
+button {
+  cursor: pointer;
+}
+
 .project-container {
   width: 140px;
   padding: 4px 8px;
   display: flex;
-  gap: 1rem;
   align-items: center;
-  justify-content: space-between;
   /* outline: 1px solid black; */
+}
+
+.project-title {
+  cursor: pointer;
+  padding: 8px;
+}
+
+.task-title-div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 h4 {

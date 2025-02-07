@@ -5,7 +5,7 @@ const projectNav = document.querySelector("#project-nav");
 const taskDialog = document.querySelector("#task-dialog");
 const selectProject = document.querySelector("#select-project");
 let deleteProjectBtns;
-let projectContainers;
+let projectTitleClick;
 let deleteTaskBtns;
 let taskContainers;
 
@@ -68,10 +68,16 @@ export function eventListeners(addProjectFn, deleteProjectFn, switchProjectFn, g
         renderTasks(arr[arr.length - 1], updateTaskElements);
     }
 
+    function switchProject(event) {
+        const index = +event.target.dataset.projectTitle;
+        renderTasks(arr[index], updateTaskElements);
+    }
+
     function updateProjectElements() {
         deleteProjectBtns = Array.from(document.querySelectorAll(".project-delete-btn"));
-        projectContainers = Array.from(document.querySelectorAll(".project-container"));
+        projectTitleClick = Array.from(document.querySelectorAll(".project-title"));
         deleteProjectBtns.forEach(item => item.addEventListener("click", deleteProject));
+        projectTitleClick.forEach(item => item.addEventListener("click", switchProject));
     }
 
     function deleteTask(event) {
@@ -92,12 +98,12 @@ function renderProjectNav(arr, fn) {
     projectNav.textContent = ""
     for (let i = 0; i < arr.length; i++) {
         const div = createElement("div", "class", "project-container", "");
-        div.setAttribute("data-project-div", `${i}`);
         const title = createElement("h4", "class", "project-title", arr[i].title);
-        const deleteBtn = createElement("button", "data-delete-project", arr[i].id, "🗑");
+        title.setAttribute("data-project-title", `${i}`);
+        const deleteBtn = createElement("button", "data-delete-project", arr[i].id, "x");
         deleteBtn.setAttribute("class", "project-delete-btn");
-        div.appendChild(title);
         div.appendChild(deleteBtn);
+        div.appendChild(title);
         projectNav.appendChild(div);
     }
     fn();
@@ -124,15 +130,23 @@ function renderTasks(obj, fn) {
 
     const taskArr = obj.tasks;
 
+    if(taskArr.length === 0) {
+        taskCardsContainer.textContent = "Add task to view";
+        return;
+    }
+
     for(let i = 0; i < taskArr.length; i++) {
         const div =  createElement("div", "class", "task-cards", "");
         const btnsDiv = createElement("div", "class", "task-btn-container", "");
-        const deleteBtn = createElement("button", "data-task-delete", taskArr[i].id, "X");
+        const deleteBtn = createElement("button", "data-task-delete", taskArr[i].id, "x");
         deleteBtn.setAttribute("data-task-delete-project", taskArr[i].projectId);
         deleteBtn.setAttribute("class", "task-delete-btn");
         btnsDiv.appendChild(deleteBtn);
-        div.appendChild(createElement("h4", "class", "task-title", "Title: " + taskArr[i].title));
-        div.appendChild(createElement("p", "class", "task-description","Description: " + taskArr[i].description));
+        const titleDiv = createElement("div", "class", "task-title-div", "");
+        titleDiv.appendChild(createElement("button", "class", "task-expand-btn", "▼"));
+        titleDiv.appendChild(createElement("h4", "class", "task-title", taskArr[i].title));
+        div.appendChild(titleDiv);
+        div.appendChild(createElement("p", "class", "task-description", taskArr[i].description));
         div.appendChild(createElement("p", "class", "task-due-date", "Due Date: " + taskArr[i].dueDate));
         div.appendChild(createElement("p", "class", "task-priority", "Priority: " + taskArr[i].priority));
         div.appendChild(createElement("hp", "class", "task-note", "Note: " + taskArr[i].note));
