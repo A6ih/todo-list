@@ -6,7 +6,7 @@ const app = [];
 class Task {
     constructor(title, description, dueDate, priority, note) {
         this.title = title;
-        this.description = description;
+        this.description = description || "No Description";
         this.dueDate = dueDate;
         this.priority = priority;
         this.note = note || "No note";
