@@ -7,6 +7,7 @@ const selectProject = document.querySelector("#select-project");
 let deleteProjectBtns;
 let projectTitleClick;
 let deleteTaskBtns;
+let taskExpandBtn;
 
 export function eventListeners(addProjectFn, deleteProjectFn, addTaskFn, deleteTaskFn, arr){
 
@@ -48,13 +49,13 @@ export function eventListeners(addProjectFn, deleteProjectFn, addTaskFn, deleteT
         const priority = document.querySelector("input[name='priority']:checked");
         const note = document.querySelector("#task-note");
         const index = +selectProject.selectedIndex;
-        console.log(index);
+        
         addTaskFn(arr[index].tasks, title.value, description.value, dueDate.value, priority.value, note.value);
         renderTasks(arr[index], updateTaskElements);
         clearInputs( [title, description, dueDate, note] );
         document.querySelector("#medium").checked = "true";
         taskDialog.close();
-        console.log(arr);
+
     })
 
     renderProjectNav(arr, updateProjectElements);
@@ -88,7 +89,22 @@ export function eventListeners(addProjectFn, deleteProjectFn, addTaskFn, deleteT
 
     function updateTaskElements() {
         deleteTaskBtns = Array.from(document.querySelectorAll(".task-delete-btn"));
+        taskExpandBtn = Array.from(document.querySelectorAll(".task-expand-btn"));
         deleteTaskBtns.forEach(item => item.addEventListener("click", deleteTask));
+        taskExpandBtn.forEach(item => item.addEventListener("click", taskToggleView));
+    }
+
+    function taskToggleView(event) {
+        const index = +event.target.dataset.expandIndex; 
+        if(event.target.textContent === "▼") {
+            showTaskElements(index);
+            event.target.textContent = "⏏"
+            return;
+        }
+        else {
+            hideTaskElements(index);
+            event.target.textContent = "▼"
+        }
     }
 }
 
@@ -105,7 +121,6 @@ function renderProjectNav(arr, fn) {
         projectNav.appendChild(div);
     }
     fn();
-    console.log(arr);
 }
 
 function renderTasks(obj, fn) {
@@ -141,7 +156,9 @@ function renderTasks(obj, fn) {
         deleteBtn.setAttribute("class", "task-delete-btn");
         btnsDiv.appendChild(deleteBtn);
         const titleDiv = createElement("div", "class", "task-title-div", "");
-        titleDiv.appendChild(createElement("button", "class", "task-expand-btn", "▼"));
+        const expandBtn = createElement("button", "class", "task-expand-btn", "▼");
+        expandBtn.setAttribute("data-expand-index", taskArr[i].id);
+        titleDiv.appendChild(expandBtn);
         titleDiv.appendChild(createElement("h4", "class", "task-title", taskArr[i].title));
         div.appendChild(titleDiv);
         div.appendChild(createElement("p", "class", "task-description", taskArr[i].description));
@@ -152,8 +169,7 @@ function renderTasks(obj, fn) {
         taskCardsContainer.appendChild(div);
     }
     fn();
-    console.log(obj);
-    hideTaskElements();
+    hideAllTaskElements()
 }
 
 function renderProjectOptions(arr) {
@@ -170,7 +186,7 @@ function clearInputs(arr) {
     }
 }
 
-function hideTaskElements() {
+function hideAllTaskElements() {
     Array.from(document.querySelectorAll(".task-description")).
         forEach(item => item.style.display = "none");
     Array.from(document.querySelectorAll(".task-note")).
@@ -179,11 +195,20 @@ function hideTaskElements() {
         forEach(item => item.style.display = "none");
 }
 
-function showTaskElements() {
-    Array.from(document.querySelectorAll(".task-description")).
-        forEach(item => item.style.display = "block");
-    Array.from(document.querySelectorAll(".task-note")).
-        forEach(item => item.style.display = "block");
-    Array.from(document.querySelectorAll(".task-btn-container")).
-        forEach(item => item.style.display = "block");
+function showTaskElements(index) { 
+    const description = document.querySelectorAll(".task-description");
+    const notes = document.querySelectorAll(".task-note");
+    const BtnContainer = document.querySelectorAll(".task-btn-container");
+    description[index].style.display = "block";
+    notes[index].style.display = "block";
+    BtnContainer[index].style.display = "block";
+}
+
+function hideTaskElements(index) {
+    const description = document.querySelectorAll(".task-description");
+    const notes = document.querySelectorAll(".task-note");
+    const BtnContainer = document.querySelectorAll(".task-btn-container");
+    description[index].style.display = "none";
+    notes[index].style.display = "none";
+    BtnContainer[index].style.display = "none";
 }
