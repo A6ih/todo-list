@@ -65,7 +65,7 @@ function updateApp() {
 }
 
 addProject("Default", "The Default Tasks");
-addTask(app[0].tasks, "Todo List", "Complete the Todo list project from the Odin project", "2025-02-10", "Low", "Take a water bottle");
+addTask(app[0].tasks, "Todo List", "Complete the Todo list project from the Odin project", "2025-02-10", "Medium", "Don't Rush");
 console.log(app);
 
 eventListeners(addProject, deleteProject, addTask, deleteTask, app, editTask);

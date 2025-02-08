@@ -1,4 +1,5 @@
 import createElement from "./createElement";
+import { format, isToday, isTomorrow} from "date-fns";
 
 const projectDialog = document.querySelector("#project-dialog");
 const projectNav = document.querySelector("#project-nav");
@@ -8,8 +9,14 @@ const editTaskDialog = document.querySelector("#edit-task-dialog");
 const projectDeleteDialog = document.querySelector("#project-delete-dialog");
 let projectId;
 let taskId;
+let today;
 
 export function eventListeners(addProjectFn, deleteProjectFn, addTaskFn, deleteTaskFn, arr, editTaskFn){
+
+    updateToday();
+    
+    Array.from(document.querySelectorAll(".date-input")).
+        forEach(item => item.setAttribute("min", today));
 
     document.querySelector("#show-project-dialog").addEventListener("click", function() {
         projectDialog.showModal();
@@ -209,7 +216,7 @@ function renderTasks(obj, fn) {
         titleDiv.appendChild(createElement("h4", "class", "task-title", taskArr[i].title));
         div.appendChild(titleDiv);
         div.appendChild(createElement("p", "class", "task-description", taskArr[i].description));
-        div.appendChild(createElement("p", "class", "task-due-date", "Due Date: " + taskArr[i].dueDate));
+        div.appendChild(createElement("p", "class", "task-due-date", "Due Date: " + updateRenderDate(taskArr[i].dueDate)));
         div.appendChild(createElement("p", "class", "task-priority", "Priority: " + taskArr[i].priority));
         div.appendChild(createElement("hp", "class", "task-note", "Note: " + taskArr[i].note));
         div.appendChild(btnsDiv);
@@ -258,4 +265,20 @@ function hideTaskElements(index) {
     description[index].style.display = "none";
     notes[index].style.display = "none";
     BtnContainer[index].style.display = "none";
+}
+
+function updateRenderDate(date) {
+    if (isToday(new Date(date))) {
+        return "Today";
+    }
+    else if(isTomorrow(new Date(date))) {
+        return "Tomorrow";
+    }
+    else {
+        return format(new Date(date), "dd MMMM yyyy");
+    }
+}
+
+function updateToday() {
+    today = format(new Date(), "yyyy-LL-dd");
 }
