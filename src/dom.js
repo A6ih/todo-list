@@ -154,6 +154,10 @@ export function eventListeners(addProjectFn, deleteProjectFn, addTaskFn, deleteT
     function showEditTaskDialog(event) {
         projectId = +event.target.dataset.taskEditProject;
         taskId = +event.target.dataset.taskEdit;
+        document.querySelector("#edit-task-title").value = arr[projectId].tasks[taskId].title;
+        document.querySelector("#edit-task-description").value = arr[projectId].tasks[taskId].description;
+        document.querySelector("#edit-task-note").value = arr[projectId].tasks[taskId].note;
+        document.querySelector("#edit-task-due-date").value = arr[projectId].tasks[taskId].dueDate;
         editTaskDialog.showModal();
     }
 }
@@ -164,7 +168,7 @@ function renderProjectNav(arr, fn) {
         const div = createElement("div", "class", "project-container", "");
         const title = createElement("h4", "class", "project-title", arr[i].title);
         title.setAttribute("data-project-title", arr[i].id);
-        const deleteBtn = createElement("button", "data-delete-project", arr[i].id, "x");
+        const deleteBtn = createElement("button", "data-delete-project", arr[i].id, "🗑");
         deleteBtn.setAttribute("class", "project-delete-btn");
         div.appendChild(deleteBtn);
         div.appendChild(title);
@@ -201,8 +205,8 @@ function renderTasks(obj, fn) {
     for(let i = 0; i < taskArr.length; i++) {
         const div =  createElement("div", "class", "task-cards", "");
         const btnsDiv = createElement("div", "class", "task-btn-container", "");
-        const deleteBtn = createElement("button", "data-task-delete", taskArr[i].id, "x");
-        const editBtn = createElement("button", "data-task-edit", taskArr[i].id, "✎")
+        const deleteBtn = createElement("button", "data-task-delete", taskArr[i].id, "🗑");
+        const editBtn = createElement("button", "data-task-edit", taskArr[i].id, "🖍")
         deleteBtn.setAttribute("data-task-delete-project", taskArr[i].projectId);
         deleteBtn.setAttribute("class", "task-delete-btn");
         editBtn.setAttribute("data-task-edit-project", taskArr[i].projectId);

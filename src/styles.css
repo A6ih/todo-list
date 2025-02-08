@@ -97,6 +97,27 @@ textarea:not([rows]) {
   border: 1px solid black;
 }
 
+#show-task-dialog,
+#show-project-dialog,
+.task-edit-btn,
+.task-expand-btn {
+  font-size: 1.6rem;
+  background-color: green;
+  color: white;
+}
+
+.task-edit-btn,
+.task-expand-btn {
+  font-size: 1rem;
+}
+
+.project-delete-btn,
+.task-delete-btn {
+  font-size: 1.1rem;
+  color: white;
+  background-color: red;
+}
+
 .project-container {
   width: 140px;
   padding: 4px 8px;
