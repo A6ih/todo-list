@@ -113,3 +113,7 @@ textarea:not([rows]) {
 h4 {
   margin: 0;
 }
+
+#project-delete-confirm {
+  white-space: pre;
+}

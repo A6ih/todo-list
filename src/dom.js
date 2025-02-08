@@ -5,11 +5,7 @@ const projectNav = document.querySelector("#project-nav");
 const taskDialog = document.querySelector("#task-dialog");
 const selectProject = document.querySelector("#select-project");
 const editTaskDialog = document.querySelector("#edit-task-dialog");
-let deleteProjectBtns;
-let projectTitleClick;
-let deleteTaskBtns;
-let taskExpandBtn;
-let editTaskBtn;
+const projectDeleteDialog = document.querySelector("#project-delete-dialog");
 let projectId;
 let taskId;
 
@@ -84,11 +80,27 @@ export function eventListeners(addProjectFn, deleteProjectFn, addTaskFn, deleteT
     renderProjectNav(arr, updateProjectElements);
     renderTasks(arr[0], updateTaskElements);
 
+    function showProjectDeleteDialog(event) {
+        projectId = +event.target.dataset.deleteProject;
+        document.querySelector("#project-delete-confirm").
+            textContent = `Are you sure you want to delete ${arr[projectId].title} project?\r\nAll task in project will be deleted`;
+        projectDeleteDialog.showModal();
+    }
+
+    document.querySelector("#project-delete-confirm-cancel").addEventListener("click", function(event)  {
+        event.preventDefault();
+        projectDeleteDialog.close();
+    });
+
+    document.querySelector("#project-delete-confirm-yes").addEventListener("click", deleteProject);
+
     function deleteProject(event) {
-        const index = +event.target.dataset.deleteProject;
+        event.preventDefault();
+        const index = projectId;
         deleteProjectFn(index);
         renderProjectNav(arr, updateProjectElements);
         renderTasks(arr[arr.length - 1], updateTaskElements);
+        projectDeleteDialog.close();
     }
 
     function switchProject(event) {
@@ -97,26 +109,26 @@ export function eventListeners(addProjectFn, deleteProjectFn, addTaskFn, deleteT
     }
 
     function updateProjectElements() {
-        deleteProjectBtns = Array.from(document.querySelectorAll(".project-delete-btn"));
-        projectTitleClick = Array.from(document.querySelectorAll(".project-title"));
-        deleteProjectBtns.forEach(item => item.addEventListener("click", deleteProject));
-        projectTitleClick.forEach(item => item.addEventListener("click", switchProject));
+        Array.from(document.querySelectorAll(".project-delete-btn")).
+            forEach(item => item.addEventListener("click", showProjectDeleteDialog));
+        Array.from(document.querySelectorAll(".project-title")).
+            forEach(item => item.addEventListener("click", switchProject));
     }
 
     function deleteTask(event) {
         const projectIndex = +event.target.dataset.taskDeleteProject;
-        const index = +event.target.dataset.taskDelete
+        const index = +event.target.dataset.taskDelete;
         deleteTaskFn(projectIndex, index);
         renderTasks(arr[projectIndex], updateTaskElements);
     }
 
     function updateTaskElements() {
-        deleteTaskBtns = Array.from(document.querySelectorAll(".task-delete-btn"));
-        taskExpandBtn = Array.from(document.querySelectorAll(".task-expand-btn"));
-        editTaskBtn = Array.from(document.querySelectorAll(".task-edit-btn"));
-        deleteTaskBtns.forEach(item => item.addEventListener("click", deleteTask));
-        taskExpandBtn.forEach(item => item.addEventListener("click", taskToggleView));
-        editTaskBtn.forEach(item => item.addEventListener("click", showEditTaskDialog));
+        Array.from(document.querySelectorAll(".task-delete-btn")).
+            forEach(item => item.addEventListener("click", deleteTask));
+        Array.from(document.querySelectorAll(".task-expand-btn")).
+            forEach(item => item.addEventListener("click", taskToggleView));
+        Array.from(document.querySelectorAll(".task-edit-btn")).
+            forEach(item => item.addEventListener("click", showEditTaskDialog));
     }
 
     function taskToggleView(event) {
@@ -144,7 +156,7 @@ function renderProjectNav(arr, fn) {
     for (let i = 0; i < arr.length; i++) {
         const div = createElement("div", "class", "project-container", "");
         const title = createElement("h4", "class", "project-title", arr[i].title);
-        title.setAttribute("data-project-title", `${i}`);
+        title.setAttribute("data-project-title", arr[i].id);
         const deleteBtn = createElement("button", "data-delete-project", arr[i].id, "x");
         deleteBtn.setAttribute("class", "project-delete-btn");
         div.appendChild(deleteBtn);
@@ -188,8 +200,8 @@ function renderTasks(obj, fn) {
         deleteBtn.setAttribute("class", "task-delete-btn");
         editBtn.setAttribute("data-task-edit-project", taskArr[i].projectId);
         editBtn.setAttribute("class", "task-edit-btn");
-        btnsDiv.appendChild(deleteBtn);
         btnsDiv.appendChild(editBtn);
+        btnsDiv.appendChild(deleteBtn);
         const titleDiv = createElement("div", "class", "task-title-div", "");
         const expandBtn = createElement("button", "class", "task-expand-btn", "▼");
         expandBtn.setAttribute("data-expand-index", taskArr[i].id);
@@ -246,20 +258,4 @@ function hideTaskElements(index) {
     description[index].style.display = "none";
     notes[index].style.display = "none";
     BtnContainer[index].style.display = "none";
-}
-
-function setProjectId(index) {
-    projectId = index;
-}
-
-function setTaskId(index)  {
-    taskId = index;
-}
-
-function getProjectId() {
-    return projectId;
-}
-
-function getTaskId() {
-    return taskId;
 }
