@@ -9,7 +9,7 @@ let projectTitleClick;
 let deleteTaskBtns;
 let taskExpandBtn;
 
-export function eventListeners(addProjectFn, deleteProjectFn, addTaskFn, deleteTaskFn, arr){
+export function eventListeners(addProjectFn, deleteProjectFn, addTaskFn, deleteTaskFn, arr, editTaskFn){
 
     document.querySelector("#show-project-dialog").addEventListener("click", function() {
         projectDialog.showModal();
@@ -152,9 +152,13 @@ function renderTasks(obj, fn) {
         const div =  createElement("div", "class", "task-cards", "");
         const btnsDiv = createElement("div", "class", "task-btn-container", "");
         const deleteBtn = createElement("button", "data-task-delete", taskArr[i].id, "x");
+        const editBtn = createElement("button", "data-task-edit", taskArr[i].id, "✎")
         deleteBtn.setAttribute("data-task-delete-project", taskArr[i].projectId);
         deleteBtn.setAttribute("class", "task-delete-btn");
+        editBtn.setAttribute("data-task-edit-project", taskArr[i].projectId);
+        editBtn.setAttribute("class", "task-edit-btn");
         btnsDiv.appendChild(deleteBtn);
+        btnsDiv.appendChild(editBtn);
         const titleDiv = createElement("div", "class", "task-title-div", "");
         const expandBtn = createElement("button", "class", "task-expand-btn", "▼");
         expandBtn.setAttribute("data-expand-index", taskArr[i].id);

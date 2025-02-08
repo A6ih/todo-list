@@ -48,6 +48,14 @@ function deleteTask(projectId, taskId) {
     createId(app[projectId].tasks);
 }
 
+function editTask(projectId, taskId, title, description, dueDate, priority, note) {
+    app[projectId].tasks[taskId].title = title;
+    app[projectId].tasks[taskId].description = description;
+    app[projectId].tasks[taskId].dueDate = dueDate;
+    app[projectId].tasks[taskId].priority = priority;
+    app[projectId].tasks[taskId]. note =  note;
+}
+
 function updateApp() {
     for (let i = 0; i < app.length; i++) {
         for (let j = 0; j < app[i].tasks.length; j++) {
@@ -60,4 +68,4 @@ addProject("Default", "The Default Tasks");
 addTask(app[0].tasks, "Todo List", "Complete the Todo list project from the Odin project", "2025-02-10", "Low", "Take a water bottle");
 console.log(app);
 
-eventListeners(addProject, deleteProject, addTask, deleteTask, app);
+eventListeners(addProject, deleteProject, addTask, deleteTask, app, editTask);

@@ -84,8 +84,17 @@ textarea:not([rows]) {
   gap: 0.5rem;
 }
 
-button {
+#show-task-dialog,
+#show-project-dialog,
+.project-delete-btn,
+.task-expand-btn,
+.task-delete-btn,
+.task-edit-btn {
   cursor: pointer;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  border: 1px solid black;
 }
 
 .project-container {
