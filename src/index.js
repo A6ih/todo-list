@@ -1,7 +1,8 @@
 import "./styles.css";
 import { eventListeners } from "./dom";
+import saveToLocalStorage, { getFromLocalStorage } from "./localStorage";
 
-const app = [];
+const app = getFromLocalStorage();
 
 class Task {
     constructor(title, description, dueDate, priority, note) {
@@ -29,23 +30,27 @@ function addTask(array, title, description, dueDate, priority, note) {
     array.push(new Task(title, description, dueDate, priority, note))
     createId(array);
     updateApp();
+    saveToLocalStorage(app);
 }
 
 function addProject(title, description) {
     app.push(new Project(title, description));
     createId(app);
     updateApp();
+    saveToLocalStorage(app);
 }
 
 function deleteProject(id) {
     app.splice(id, 1);
     createId(app);
     updateApp();
+    saveToLocalStorage(app);
 }
 
 function deleteTask(projectId, taskId) {
     app[projectId].tasks.splice(taskId, 1);
     createId(app[projectId].tasks);
+    saveToLocalStorage(app);
 }
 
 function editTask(projectId, taskId, title, description, dueDate, priority, note) {
@@ -54,6 +59,7 @@ function editTask(projectId, taskId, title, description, dueDate, priority, note
     app[projectId].tasks[taskId].dueDate = dueDate;
     app[projectId].tasks[taskId].priority = priority;
     app[projectId].tasks[taskId]. note =  note;
+    saveToLocalStorage(app);
 }
 
 function updateApp() {
@@ -63,9 +69,5 @@ function updateApp() {
         }
     }
 }
-
-addProject("Default", "The Default Tasks");
-addTask(app[0].tasks, "Todo List", "Complete the Todo list project from the Odin project", "2025-02-10", "Medium", "Don't Rush");
-console.log(app);
 
 eventListeners(addProject, deleteProject, addTask, deleteTask, app, editTask);

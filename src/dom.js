@@ -1,5 +1,5 @@
 import createElement from "./createElement";
-import { format, isToday, isTomorrow} from "date-fns";
+import { format, isToday, isTomorrow, isPast, isYesterday} from "date-fns";
 
 const projectDialog = document.querySelector("#project-dialog");
 const projectNav = document.querySelector("#project-nav");
@@ -14,7 +14,7 @@ let today;
 export function eventListeners(addProjectFn, deleteProjectFn, addTaskFn, deleteTaskFn, arr, editTaskFn){
 
     updateToday();
-    
+
     Array.from(document.querySelectorAll(".date-input")).
         forEach(item => item.setAttribute("min", today));
 
@@ -273,6 +273,12 @@ function updateRenderDate(date) {
     }
     else if(isTomorrow(new Date(date))) {
         return "Tomorrow";
+    }
+    else if(isYesterday(new Date(date))) {
+        return "Expired Yesterday"
+    }
+    else if(isPast(new Date(date))) {
+        return `Expired on ${format(new Date(date), "dd MMMM yyyy")}`;
     }
     else {
         return format(new Date(date), "dd MMMM yyyy");
