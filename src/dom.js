@@ -111,7 +111,11 @@ export function eventListeners(addProjectFn, deleteProjectFn, addTaskFn, deleteT
     }
 
     function switchProject(event) {
+        Array.from(document.querySelectorAll(".project-title")).
+            forEach(item => item.style.backgroundColor = "transparent");
+
         const index = +event.target.dataset.projectTitle;
+        event.target.style.backgroundColor = "var(--background-color)";
         renderTasks(arr[index], updateTaskElements);
     }
 
@@ -192,6 +196,7 @@ function renderTasks(obj, fn) {
         return;
     }
 
+    document.querySelector(`[data-project-title="${obj.id}"]`).style.backgroundColor = "var(--background-color)";
     projectHeader.textContent = obj.title;
     projectDecription.textContent = obj.description;
 

@@ -273,7 +273,7 @@ main {
 }
 
 .task-btn-container {
-  gap: 1rem;
+  justify-content: space-between;
 }
 
 .task-title-div {

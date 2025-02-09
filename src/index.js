@@ -1,6 +1,7 @@
 import "./styles.css";
 import { eventListeners } from "./dom";
 import saveToLocalStorage, { getFromLocalStorage } from "./localStorage";
+import { format } from "date-fns";
 
 const app = getFromLocalStorage();
 
@@ -8,7 +9,7 @@ class Task {
     constructor(title, description, dueDate, priority, note) {
         this.title = title;
         this.description = description || "No Description";
-        this.dueDate = dueDate;
+        this.dueDate = dueDate || format(new Date(), "yyyy-LL-dd");
         this.priority = priority;
         this.note = note || "No note";
     }
