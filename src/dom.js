@@ -216,8 +216,8 @@ function renderTasks(obj, fn) {
         const titleDiv = createElement("div", "class", "task-title-div", "");
         const expandBtn = createElement("button", "class", "task-expand-btn", "▼");
         expandBtn.setAttribute("data-expand-index", taskArr[i].id);
-        titleDiv.appendChild(expandBtn);
         titleDiv.appendChild(createElement("h4", "class", "task-title", taskArr[i].title));
+        titleDiv.appendChild(expandBtn);
         div.appendChild(titleDiv);
         div.appendChild(createElement("p", "class", "task-description", taskArr[i].description));
         div.appendChild(createElement("p", "class", "task-due-date", "Due Date: " + updateRenderDate(taskArr[i].dueDate)));
@@ -259,7 +259,7 @@ function showTaskElements(index) {
     const BtnContainer = document.querySelectorAll(".task-btn-container");
     description[index].style.display = "block";
     notes[index].style.display = "block";
-    BtnContainer[index].style.display = "block";
+    BtnContainer[index].style.display = "flex";
 }
 
 function hideTaskElements(index) {

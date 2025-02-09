@@ -73,8 +73,126 @@ textarea:not([rows]) {
   scroll-margin-block: 5ex;
 }
 
+:root {
+  --text-color: white;
+  --secondary-color: #5F758E;
+  --black-color: #00120B;
+  --green-color: #3EC300;
+  --red-color: #FF3C38;
+  --yellow-color: #F4B860;
+  --common-padding: 0.5rem;
+  --border-color: #C1CAD6;
+  --background-color: #383961;
+  --radius: 0.5rem;
+}
+
 * {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  text-shadow: 0 0 1px var(--black-color);
+  color: var(--text-color);
+  border-radius: var(--radius);
+  font-weight: 600;
+}
+
+button {
+  background-color: var(--background-color);
+  padding: 6px 12px;
+  border: 2px solid var(--border-color);
+}
+
+input,
+textarea,
+fieldset,
+select {
+  background-color: var(--background-color);
+  border: 2px solid var(--border-color);
+  padding: var(--common-padding);
+  color: var(--text-color);
+  font-weight: 800;
+}
+
+label {
+  font-weight: 800;
+}
+
+dialog {
+  margin: auto;
+  background-color: var(--secondary-color);
+  border: 2px solid var(--border-color);
+  padding: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--common-padding);
+}
+
+body {
+  padding: var(--common-padding);
+  display: grid;
+  grid-template-rows: 70px 1fr;
+  grid-template-columns: 180px 1fr;
+  grid-template-areas: 
+    "header header"
+    "navbar main";
+  gap: 8px;
+  background-color: var(--background-color);
+}
+
+header {
+  grid-area: header;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+
+nav {
+  grid-area: navbar;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+  padding: 0.5rem;
+  background-color: var(--secondary-color);
+}
+
+main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-left: 8px;
+}
+
+#task-cards-container {
+  display: grid;
+  gap: 1rem;
+}
+
+.task-cards {
+  min-width: 45ch;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  outline: 1px solid var(--border-color);
+}
+
+#project-header-container {
+  padding: 0.5rem;
+  background-color: var(--secondary-color);
+}
+
+#project-description-display,
+.task-description {
+  width: 44ch;
+  overflow-wrap: break-word;
 }
 
 .add-btn-container,
@@ -92,9 +210,10 @@ textarea:not([rows]) {
 .task-edit-btn {
   cursor: pointer;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  border: 1px solid black;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border-color);
+  padding: 0;
 }
 
 #show-task-dialog,
@@ -102,8 +221,7 @@ textarea:not([rows]) {
 .task-edit-btn,
 .task-expand-btn {
   font-size: 1.6rem;
-  background-color: green;
-  color: white;
+  background-color: var(--green-color);
 }
 
 .task-edit-btn,
@@ -114,27 +232,51 @@ textarea:not([rows]) {
 .project-delete-btn,
 .task-delete-btn {
   font-size: 1.1rem;
-  color: white;
-  background-color: red;
+  background-color: var(--red-color);
 }
 
 .project-container {
-  width: 140px;
+  width: 100%;
   padding: 4px 8px;
   display: flex;
   align-items: center;
+  gap: 4px;
   /* outline: 1px solid black; */
 }
 
-.project-title {
-  cursor: pointer;
-  padding: 8px;
+#project-nav {
+  width: 100%;
 }
 
-h4 {
-  margin: 0;
+.project-title {
+  width: 75%;
+  cursor: pointer;
+  padding: 6px 8px;
+  overflow-wrap: break-word;
+}
+
+#project-delete-dialog {
+  text-align: center;
+}
+
+#project-delete-confirm {
+  margin-bottom: 1rem;
+}
+
+.project-title:active,
+.project-title:hover {
+  background-color: var(--background-color);
 }
 
 #project-delete-confirm {
   white-space: pre;
+}
+
+.task-btn-container {
+  gap: 1rem;
+}
+
+.task-title-div {
+  display: flex;
+  justify-content: space-between;
 }
