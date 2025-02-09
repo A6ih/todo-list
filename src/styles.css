@@ -181,7 +181,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  outline: 1px solid var(--border-color);
+  border : 2px solid var(--border-color);
 }
 
 #project-header-container {

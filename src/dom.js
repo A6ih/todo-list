@@ -223,10 +223,12 @@ function renderTasks(obj, fn) {
         expandBtn.setAttribute("data-expand-index", taskArr[i].id);
         titleDiv.appendChild(createElement("h4", "class", "task-title", taskArr[i].title));
         titleDiv.appendChild(expandBtn);
+        const priority = createElement("p", "class", "task-priority", "Priority: " + taskArr[i].priority);
+        addPriorityColor(div, priority);
         div.appendChild(titleDiv);
         div.appendChild(createElement("p", "class", "task-description", taskArr[i].description));
         div.appendChild(createElement("p", "class", "task-due-date", "Due Date: " + updateRenderDate(taskArr[i].dueDate)));
-        div.appendChild(createElement("p", "class", "task-priority", "Priority: " + taskArr[i].priority));
+        div.appendChild(priority);
         div.appendChild(createElement("hp", "class", "task-note", "Note: " + taskArr[i].note));
         div.appendChild(btnsDiv);
         taskCardsContainer.appendChild(div);
@@ -296,4 +298,15 @@ function updateRenderDate(date) {
 
 function updateToday() {
     today = format(new Date(), "yyyy-LL-dd");
+}
+
+function addPriorityColor(div, element) {
+    if(element.textContent === "Priority: High") {
+        div.style.borderColor = "var(--red-color)";
+        element.style.textShadow = "0 0 2px var(--red-color)"
+    }
+    else if(element.textContent === "Priority: Medium") {
+        div.style.borderColor = "var(--yellow-color)";
+        element.style.textShadow = "0 0 2px var(--yellow-color)"
+    }
 }
