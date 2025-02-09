@@ -1,4 +1,3 @@
-
 /* Box sizing rules */
 *,
 *::before,
@@ -136,7 +135,7 @@ body {
   grid-template-columns: 200px 1fr;
   grid-template-areas: 
     "header header"
-    "navbar main";
+    "nav main";
   gap: 8px;
   background-color: var(--background-color);
 }
@@ -153,11 +152,11 @@ header {
 }
 
 nav {
-  grid-area: navbar;
+  grid-area: nav;
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: 10px;
+  gap: 0.5rem;
   padding: 0.5rem 1rem;
   background-color: var(--secondary-color);
 }
