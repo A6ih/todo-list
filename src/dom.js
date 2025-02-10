@@ -38,7 +38,7 @@ export function eventListeners(addProjectFn, deleteProjectFn, addTaskFn, deleteT
         taskDialog.close();
     })
 
-    document.querySelector("#add-project-btn").addEventListener("click", function(event) {
+    document.querySelector("#project-form").addEventListener("submit", function(event) {
         event.preventDefault();
         const title = document.querySelector("#project-title");
         const description = document.querySelector("#project-description");
@@ -49,7 +49,7 @@ export function eventListeners(addProjectFn, deleteProjectFn, addTaskFn, deleteT
         renderTasks(arr[arr.length - 1], updateTaskElements);
     })
 
-    document.querySelector("#add-task-btn").addEventListener("click", function(event) {
+    document.querySelector("#task-form").addEventListener("submit", function(event) {
         event.preventDefault();
         const title = document.querySelector("#task-title");
         const description = document.querySelector("#task-description");
@@ -57,7 +57,6 @@ export function eventListeners(addProjectFn, deleteProjectFn, addTaskFn, deleteT
         const priority = document.querySelector("input[name='priority']:checked");
         const note = document.querySelector("#task-note");
         const index = +selectProject.selectedIndex;
-        
         addTaskFn(arr[index].tasks, title.value, description.value, dueDate.value, priority.value, note.value);
         renderTasks(arr[index], updateTaskElements);
         clearInputs( [title, description, dueDate, note] );
@@ -65,7 +64,7 @@ export function eventListeners(addProjectFn, deleteProjectFn, addTaskFn, deleteT
         taskDialog.close();
     })
 
-    document.querySelector("#save-task-btn").addEventListener("click", function(event) {
+    document.querySelector("#edit-task-form").addEventListener("submit", function(event) {
         event.preventDefault();
         const title = document.querySelector("#edit-task-title");
         const description = document.querySelector("#edit-task-description");

@@ -14,7 +14,7 @@
             </button>
             <label for="show-task-dialog">Add Task</label>
             <dialog id="task-dialog">
-                <form action="">
+                <form action="" id="task-form">
                     <p>
                         <label for="task-title">Title</label><br>
                         <input type="text" name="task-title" id="task-title" required>
@@ -51,7 +51,7 @@
                         <select name="select-project" id="select-project"></select>
                     </p>
                     <div>
-                        <button id="add-task-btn">
+                        <button id="add-task-btn" type="submit">
                             Add
                         </button>
                         <button id="task-cancel-btn">
@@ -77,7 +77,7 @@
         </div>
         <div id="project-nav"></div>
         <dialog id="project-dialog">
-            <form action="">
+            <form action="" id="project-form">
                 <p>
                     <label for="project-title">Title:</label><br>
                     <input type="text" name="project-title" id="project-title" required>
@@ -87,7 +87,7 @@
                     <textarea name="project-description" id="project-description" maxlength="160"></textarea>
                 </p>
                 <div>
-                    <button id="add-project-btn">
+                    <button type="submit" id="add-project-btn">
                         Add
                     </button>
                     <button id="project-cancel-btn">
@@ -106,7 +106,7 @@
 
         </div>
         <dialog id="edit-task-dialog">
-            <form action="">
+            <form action="" id="edit-task-form">
                 <p>
                     <label for="edit-task-title">Title</label><br>
                     <input type="text" name="edit-task-title" id="edit-task-title" required>
@@ -139,7 +139,7 @@
                     <textarea name="edit-task-note" id="edit-task-note" cols="20" rows="6"></textarea>
                 </p>
                 <div>
-                    <button id="save-task-btn">
+                    <button id="save-task-btn" type="submit">
                         Save
                     </button>
                     <button id="edit-task-cancel-btn">
